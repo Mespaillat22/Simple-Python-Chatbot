@@ -1,6 +1,8 @@
 
 import nltk
 from nltk.stem import WordNetLemmatizer
+import secrets
+
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
@@ -8,7 +10,6 @@ import numpy as np
 from keras.models import load_model
 model = load_model('chatbot_model.h5')
 import json
-import random
 intents = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl','rb'))
 classes = pickle.load(open('classes.pkl','rb'))
@@ -53,7 +54,7 @@ def getResponse(ints, intents_json):
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if(i['tag']== tag):
-            result = random.choice(i['responses'])
+            result = secrets.choice(i['responses'])
             break
     return result
 
