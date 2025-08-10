@@ -1,4 +1,6 @@
 import nltk
+import secrets
+
 nltk.download('punkt')
 nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
@@ -10,7 +12,6 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
-import random
 
 words=[]
 classes = []
@@ -68,7 +69,7 @@ for doc in documents:
 
     training.append([bag, output_row])
 # shuffle our features and turn into np.array
-random.shuffle(training)
+secrets.SystemRandom().shuffle(training)
 training = np.array(training)
 # create train and test lists. X - patterns, Y - intents
 train_x = list(training[:,0])
